@@ -2,6 +2,7 @@ package ru.barsky.cargo.service
 
 import org.springframework.stereotype.Service
 import ru.barsky.cargo.dto.CargoDto
+import ru.barsky.cargo.exception.CargoNotFoundException
 import ru.barsky.cargo.model.Cargo
 import ru.barsky.cargo.repository.CargoRepository
 
@@ -16,7 +17,7 @@ class CargoServiceImpl(
     override fun getById(id: Int): CargoDto =
         cargoRepository.findById(id)
             ?.toDto()
-            ?: throw NoSuchElementException("No such cargo with id = $id")
+            ?: throw CargoNotFoundException(id)
 
     override fun create(dto: CargoDto): Int =
         cargoRepository.create(dto.title, dto.passengerCount)
