@@ -8,9 +8,9 @@ interface CargoRepository {
 
     fun findById(id: Int): Cargo?
 
-    fun create(model: Cargo)
+    fun create(title: String, passengerCount: Int?): Int
 
-    fun update(id: Int, model: Cargo)
+    fun update(id: Int, title: String, passengerCount: Int?)
 
-    fun delete(id: Int)
+    fun deleteById(id: Int)
 }

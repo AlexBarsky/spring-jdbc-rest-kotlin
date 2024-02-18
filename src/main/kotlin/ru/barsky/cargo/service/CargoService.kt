@@ -7,9 +7,9 @@ interface CargoService {
 
     fun getById(id: Int): CargoDto
 
-    fun create(dto: CargoDto)
+    fun create(dto: CargoDto): Int
 
     fun update(id: Int, dto: CargoDto)
 
-    fun delete(id: Int)
+    fun deleteById(id: Int)
 }

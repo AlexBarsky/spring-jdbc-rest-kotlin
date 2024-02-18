@@ -18,16 +18,15 @@ class CargoServiceImpl(
             ?.toDto()
             ?: throw NoSuchElementException("No such cargo with id = $id")
 
-    override fun create(dto: CargoDto) {
-        TODO("Not yet implemented")
-    }
+    override fun create(dto: CargoDto): Int =
+        cargoRepository.create(dto.title, dto.passengerCount)
 
     override fun update(id: Int, dto: CargoDto) {
-        TODO("Not yet implemented")
+        cargoRepository.update(id, dto.title, dto.passengerCount)
     }
 
-    override fun delete(id: Int) {
-        TODO("Not yet implemented")
+    override fun deleteById(id: Int) {
+        cargoRepository.deleteById(id)
     }
 
     private fun Cargo.toDto(): CargoDto = CargoDto(

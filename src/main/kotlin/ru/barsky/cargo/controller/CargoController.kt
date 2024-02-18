@@ -10,16 +10,15 @@ class CargoController(
     private val cargoService: CargoService,
 ) {
 
-    @GetMapping()
+    @GetMapping
     fun getAll(): List<CargoDto> = cargoService.getAll()
 
     @GetMapping("/{id}")
     fun getById(@PathVariable id: Int): CargoDto = cargoService.getById(id)
 
-    @PostMapping()
-    fun create(@RequestBody dto: CargoDto) {
+    @PostMapping
+    fun create(@RequestBody dto: CargoDto): Int =
         cargoService.create(dto)
-    }
 
     @PutMapping("/{id}")
     fun update(@PathVariable id: Int, @RequestBody dto: CargoDto) {
@@ -28,6 +27,6 @@ class CargoController(
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: Int) {
-        cargoService.delete(id)
+        cargoService.deleteById(id)
     }
 }

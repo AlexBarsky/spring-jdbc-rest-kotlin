@@ -1,7 +1,9 @@
 package ru.barsky.cargo.repository
 
 import org.springframework.jdbc.core.RowMapper
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
+import org.springframework.jdbc.support.GeneratedKeyHolder
 import org.springframework.stereotype.Repository
 import ru.barsky.cargo.model.Cargo
 import ru.barsky.cargo.util.getIntOrNull
@@ -26,16 +28,41 @@ class CargoRepositoryImpl(
             ROW_MAPPER,
         ).firstOrNull()
 
-    override fun create(model: Cargo) {
-        TODO("Not yet implemented")
+    override fun create(title: String, passengerCount: Int?): Int {
+        val keyHolder = GeneratedKeyHolder()
+
+        jdbcTemplate.update(
+            "INSERT INTO cargo (title, passenger_count) VALUES (:title, :passengerCount)",
+            MapSqlParameterSource(
+                mapOf(
+                    "title" to title,
+                    "passengerCount" to passengerCount,
+                )
+            ),
+            keyHolder,
+            listOf("id").toTypedArray()
+        )
+        return keyHolder.keys?.getValue("id") as Int
     }
 
-    override fun update(id: Int, model: Cargo) {
-        TODO("Not yet implemented")
+    override fun update(id: Int, title: String, passengerCount: Int?) {
+        jdbcTemplate.update(
+            "UPDATE cargo SET title = :title, passenger_count = :passengerCount WHERE id = :id",
+            mapOf(
+                "id" to id,
+                "title" to title,
+                "passengerCount" to passengerCount,
+            )
+        )
     }
 
-    override fun delete(id: Int) {
-        TODO("Not yet implemented")
+    override fun deleteById(id: Int) {
+        jdbcTemplate.update(
+            "DELETE FROM cargo WHERE id = :id",
+            mapOf(
+                "id" to id,
+            )
+        )
     }
 
     private companion object {
