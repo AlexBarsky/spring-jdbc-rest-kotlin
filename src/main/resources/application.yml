@@ -8,3 +8,5 @@ spring:
     init:
       schema-locations: classpath:schema.sql
       mode: always
+scheduler:
+  intervalMs: 3000

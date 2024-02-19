@@ -1,5 +1,6 @@
 package ru.barsky.cargo.service
 
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import ru.barsky.cargo.dto.CargoDto
 import ru.barsky.cargo.exception.CargoNotFoundException
@@ -28,6 +29,12 @@ class CargoServiceImpl(
 
     override fun deleteById(id: Int) {
         cargoRepository.deleteById(id)
+    }
+
+    private val logger = LoggerFactory.getLogger(CargoServiceImpl::class.java)
+
+    override fun doForSchedule() {
+        logger.info("schedule invoked")
     }
 
     private fun Cargo.toDto(): CargoDto = CargoDto(
