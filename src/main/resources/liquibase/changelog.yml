@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: DEV-1
+      author: barsky
+      changes:
+        - createTable:
+            tableName: article
+            remarks: Articles
+            columns:
+              - column:
+                  name: id
+                  type: integer
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: article_id
+                    nullable: false
+              - column:
+                  name: url
+                  remarks: Constant URL to article
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+                    uniqueConstraintName: article_url_uq
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_visible
+                  type: boolean
+                  defaultValue: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp without time zone
+                  defaultValue: now()
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: DEV-2
+      author: barsky
+      changes:
+        - renameColumn:
+            oldColumnName: title
+            newColumnName: header
+            tableName: article
