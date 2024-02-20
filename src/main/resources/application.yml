@@ -4,9 +4,14 @@ spring:
     url: jdbc:postgresql://localhost:5432/testdb
     username: developer
     password: developer
+
   sql:
     init:
       schema-locations: classpath:schema.sql
       mode: always
+
+  liquibase:
+    change-log: classpath:liquibase/changelog.yml
+
 scheduler:
   intervalMs: 3000
