@@ -11,7 +11,7 @@ class CargoController(
 ) {
 
     @GetMapping
-    fun getAll(): List<CargoDto> = cargoService.getAll()
+    fun getAll(@RequestParam("page") pageIndex: Int): List<CargoDto> = cargoService.getAll(pageIndex)
 
     @GetMapping("/{id}")
     fun getById(@PathVariable id: Int): CargoDto = cargoService.getById(id)

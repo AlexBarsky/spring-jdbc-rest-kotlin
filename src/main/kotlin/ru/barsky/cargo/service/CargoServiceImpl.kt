@@ -10,8 +10,8 @@ import ru.barsky.cargo.repository.CargoRepository
 class CargoServiceImpl(
     private val cargoRepository: CargoRepository,
 ) : CargoService {
-    override fun getAll(): List<CargoDto> =
-        cargoRepository.getAll()
+    override fun getAll(pageIndex: Int): List<CargoDto> =
+        cargoRepository.getAll(pageIndex)
             .map { it.toDto() }
 
     override fun getById(id: Int): CargoDto =

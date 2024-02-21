@@ -3,7 +3,7 @@ package ru.barsky.cargo.service
 import ru.barsky.cargo.dto.CargoDto
 
 interface CargoService {
-    fun getAll(): List<CargoDto>
+    fun getAll(pageIndex: Int): List<CargoDto>
 
     fun getById(id: Int): CargoDto
 
